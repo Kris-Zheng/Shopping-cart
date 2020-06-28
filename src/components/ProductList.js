@@ -23,7 +23,7 @@ class ProductList extends React.Component {
 
         const list = (products.productsList || []).map((item) => (
             <Card style={{ textAlign: 'center' }} key={item.id}>
-                <img src={`./product/${item.sku}_1.jpg`} alt='loading' />
+                <img src={`./images/${item.sku}_1.jpg`} alt='loading' />
                 <h3>{item.title}</h3>
                 <h4>{item.currencyFormat}{item.price}</h4>
                 <Popover

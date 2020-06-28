@@ -62,7 +62,6 @@ export default {
         ...state,
         productsList
       }
-
     },
 
     sortedBysize: (state, { payload }) => {
