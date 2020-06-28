@@ -26,7 +26,7 @@ class Cart extends React.Component {
 
         const nodes = cart.added.map((item, index) => (
             <li key={item.id + item.size}>
-                <img src={`./product/${item.sku}_2.jpg`} alt='loading' />
+                <img src={`./images/${item.sku}_2.jpg`} alt='loading' />
                 <span>{item.title} | </span>
                 <span>{item.style}</span>
                 <Button onClick={() => deleteProduct(item.id)} style={{ width: '20px', height: '20px', padding: '0', float: 'right' }}><CloseOutlined /></Button>
