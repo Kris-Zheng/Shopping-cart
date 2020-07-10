@@ -19,9 +19,10 @@ class ProductList extends React.Component {
     render() {
         const { Option } = Select;
         const { products, handleSort, addToCart } = this.props;
+        console.log("1111111111111111",products)
 
 
-        const list = (products.productsList || []).map((item) => (
+        const list = products.map((item) => (
             <Card style={{ textAlign: 'center' }} key={item.id}>
                 <img src={`./images/${item.sku}_1.jpg`} alt='loading' />
                 <h3>{item.title}</h3>
@@ -60,7 +61,7 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = ({ products }) => ({
-    products: products
+    products: products.productsList
 })
 
 const mapDispatchToProps = (dispatch) => ({

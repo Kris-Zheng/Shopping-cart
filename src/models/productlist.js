@@ -40,7 +40,7 @@ export default {
       console.log('fetch products and reduce => ',payload)
       return {
         ...state,
-        productsList: payload
+        productsList: payload,
       }
     },
 
@@ -65,28 +65,28 @@ export default {
     },
 
     sortedBysize: (state, { payload }) => {
-      const { productsList } = state;
-      console.log('products got payload => ',payload)
-      console.log(payload.initProducts)
+      
+      // console.log('products got payload => ',payload)
+      // console.log(payload.initProducts)
 
       const result = payload.initProducts.reduce((total, currentValue) =>{
         console.log('current value => ',currentValue)
         for (let i = 0; i < payload.size.length; i++) {
           if (currentValue.availableSizes.includes(payload.size[i])) {
-            console.log('current size=>',payload.size[i])
-            console.log('currentValue.availableSizes',currentValue.availableSizes)
+            // console.log('current size=>',payload.size[i])
+            // console.log('currentValue.availableSizes',currentValue.availableSizes)
             total.push(currentValue);
           }
-          
         }
-        console.log("total",total)
+
+        // console.log("total",total)
         return total
       },[])
 
-      console.log('result=>',result)
-
+      //console.log('init=>',payload.initProducts)
+        
       const uniqueSet = new Set(result);
-      const backToArray = [...uniqueSet];
+      const backToArray = ( uniqueSet.size === 0 ? payload.initProducts : [...uniqueSet]);
 
       return {
         ...state,

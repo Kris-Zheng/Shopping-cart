@@ -9,17 +9,8 @@ import {
   ShoppingCartOutlined
 } from '@ant-design/icons';
 
-
-
 class Products extends React.Component {
 
-  // componentDidMount() {
-  //   const { dispatch } = this.props;
-  //   console.log('Product.js props=>',this.props)
-  //   dispatch({
-  //      type: 'products/query',
-  //    });
-  // }
   state = { visible: false };
 
   showDrawer = () => {
@@ -36,6 +27,7 @@ class Products extends React.Component {
 
   render() {
     const { Header, Footer, Content, Sider } = Layout;
+
     return (
       <div>
         <Layout>
@@ -66,6 +58,5 @@ class Products extends React.Component {
     )
   }
 }
-
 
 export default connect()(Products);
