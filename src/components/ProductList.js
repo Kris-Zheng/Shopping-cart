@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Card, Button, Select, Popover, List } from 'antd';
+
+
 class ProductList extends React.Component {
 
     state = {
@@ -15,10 +17,9 @@ class ProductList extends React.Component {
     render() {
         const { Option } = Select;
         const { products, handleSort, addToCart } = this.props;
-        console.log("1111111111111111",products)
 
 
-        const list = products.map((item) => (
+        const list = (products.productsList || []).map((item) => (
             <Card style={{ textAlign: 'center' }} key={item.id}>
                 <img src={`./images/${item.sku}_1.jpg`} alt='loading' />
                 <h3>{item.title}</h3>
@@ -57,7 +58,7 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = ({ products }) => ({
-    products: products.productsList
+    products: products
 })
 
 const mapDispatchToProps = (dispatch) => ({
