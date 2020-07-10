@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Card, Button, Select, Popover, List } from 'antd';
-import {
-    SyncOutlined,
-} from '@ant-design/icons';
-
 class ProductList extends React.Component {
 
     state = {

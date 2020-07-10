@@ -22,7 +22,6 @@ class Filter extends React.Component {
 
      getApi = async () => {
         const {dispatch} = this.props
-        const {initProducts} = this.state
         await dispatch({
             type: 'products/query',
             callback:data=>{
