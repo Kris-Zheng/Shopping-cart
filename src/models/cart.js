@@ -18,10 +18,10 @@ export default {
       });
     },
 
-    *deleteProduct({ payload: { id , size } }, { put }) {
+    *deleteProduct({ payload: { id, size } }, { put }) {
       yield put({
         type: "Deleted",
-        payload: id , size
+        payload: id, size
       })
     },
 
@@ -62,9 +62,7 @@ export default {
 
     saveProducts: (state, { payload }) => {
       // console.log('saveProducts has been used')
-
       const { added } = state
-
       // console.log("itemsize", payload.size);
       if (added.length === 0) {
 
@@ -118,7 +116,7 @@ export default {
         if (currentValue.id !== id || currentValue.size !== size) {
           total.push(currentValue)
         }
-        console.log('total',total);
+        console.log('total', total);
         return total
       }, [])
 
@@ -134,7 +132,9 @@ export default {
     checkout: (state, payload) => {
 
       const empty = state.added;
-      empty.splice(0,empty.length);
+      empty.splice(0, empty.length);
+
+      window.localStorage.setItem('added', JSON.stringify(empty));
 
       return {
         ...state,
@@ -152,7 +152,6 @@ export default {
         added
       }
     }
-
   },
 };
 
