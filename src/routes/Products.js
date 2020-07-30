@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import 'antd/dist/antd.css';
-import { Layout, Drawer,Badge,Button } from 'antd';
+import { Layout, Drawer, Badge, Button } from 'antd';
 import ProductList from '../components/ProductList';
 import Cart from '../components/Cart';
 import Filter from '../components/Filter';
@@ -27,36 +27,41 @@ class Products extends React.Component {
 
   render() {
     const { Header, Footer, Content, Sider } = Layout;
+    const {cart} = this.props
+    const number = cart.added.length;
 
     return (
       <div>
         <Layout>
-          <Header></Header>
+          <Header>
+            <div style={{ position: 'fixed', top: 45, right: 40 }}>
+              <Badge count={number} showZero>
+                <Button size="large" onClick={this.showDrawer} shape="round"><ShoppingCartOutlined /></Button>
+              </Badge>
+            </div>
+          </Header>
           <Layout>
             <Sider style={{ backgroundColor: 'lightgray' }}><Filter /></Sider>
             <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
               <ProductList />
+              <Drawer
+                title="Your cart"
+                width="700"
+                placement="right"
+                onClose={this.onClose}
+                visible={this.state.visible}
+              >
+                <Cart />
+              </Drawer>
             </Content>
           </Layout>
           <Footer></Footer>
         </Layout>
-        <div style={{ position: 'fixed', top: 45, right: 40 }}>
-          <Badge showZero>
-            <Button size="large" onClick={this.showDrawer} shape="round"><ShoppingCartOutlined/></Button>
-          </Badge>
-        </div>
-        <Drawer
-          title="Your cart"
-          width="700"
-          placement="right"
-          onClose={this.onClose}
-          visible={this.state.visible}
-        >
-          <Cart />
-        </Drawer>
       </div>
     )
   }
 }
 
-export default connect()(Products);
+const mapStateToProps = ({ cart }) => ({ cart })
+
+export default connect(mapStateToProps)(Products);

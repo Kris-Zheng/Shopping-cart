@@ -18,10 +18,10 @@ export default {
       });
     },
 
-    *checkout({ payload: { id } }, { put }) {
+    *deleteProduct({ payload: { id , size } }, { put }) {
       yield put({
         type: "Deleted",
-        payload: id
+        payload: id , size
       })
     },
 
@@ -32,7 +32,7 @@ export default {
       })
     },
 
-    *onCheckout({ payload }, { put }) {
+    *checkOut({ payload }, { put }) {
       yield put({
         type: "checkout",
       })
@@ -61,16 +61,16 @@ export default {
     },
 
     saveProducts: (state, { payload }) => {
-      console.log('saveProducts has been used')
+      // console.log('saveProducts has been used')
 
       const { added } = state
 
-      console.log("itemsize", payload.size);
+      // console.log("itemsize", payload.size);
       if (added.length === 0) {
 
         added.push({ ...payload, count: 1 })
         window.localStorage.setItem('added', JSON.stringify(added))
-        console.log('local storage set item => ', added)
+        // console.log('local storage set item => ', added)
         return {
           ...state,
           added
@@ -86,7 +86,7 @@ export default {
       // }
       // 2. find
       const isExisted = added.find(item => item.id === payload.id && item.size === payload.size)
-      console.log('isExisted => ', isExisted)
+      // console.log('isExisted => ', isExisted)
       let result = []
       if (isExisted) {
         result = added.reduce((total, currentValue) => {
@@ -101,7 +101,7 @@ export default {
         result = [...added, payload]
       }
       window.localStorage.setItem('added', JSON.stringify(result))
-      console.log('local storage set item => ', result)
+      // console.log('local storage set item => ', result)
 
       return {
         ...state,
@@ -110,15 +110,15 @@ export default {
     },
 
     Deleted: (state, { payload }) => {
-      const { id } = payload;
-      console.log("reducer work => ", id)
+      const { id, size } = payload;
 
       const del = state.added;
 
       const afterReducer = del.reduce((total, currentValue) => {
-        if (currentValue.id !== id) {
+        if (currentValue.id !== id || currentValue.size !== size) {
           total.push(currentValue)
         }
+        console.log('total',total);
         return total
       }, [])
 
@@ -133,18 +133,19 @@ export default {
 
     checkout: (state, payload) => {
 
-      let added = []
+      const empty = state.added;
+      empty.splice(0,empty.length);
 
       return {
         ...state,
-        added: added
+        added: empty
       }
     },
 
     saveCart: state => {
 
       const added = JSON.parse(window.localStorage.getItem('added'));
-      console.log('init cart => ', added)
+      // console.log('init cart => ', added)
 
       return {
         ...state,

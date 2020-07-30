@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Card, Button, Select, Popover, List } from 'antd';
 
 
-class ProductList extends React.Component {
+class ProductList extends React.Component          {
 
     state = {
         initProduct: []
