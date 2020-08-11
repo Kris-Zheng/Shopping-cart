@@ -11,7 +11,12 @@ import {
 
 class Products extends React.Component {
 
-  state = { visible: false };
+  state = { visible: false, a: '' };
+
+  componentDidMount(){
+    const { saveCart } = this.props;
+    saveCart();
+  }
 
   showDrawer = () => {
     this.setState({
@@ -26,9 +31,11 @@ class Products extends React.Component {
   };
 
   render() {
-    const { Header, Footer, Content, Sider } = Layout;
-    const {cart} = this.props
+    const { Header, Footer, Content, Sider } = Layout; 
+    const { cart } = this.props
     const number = cart.added.length;
+
+    console.log('props',this.props);
 
     return (
       <div>
@@ -64,4 +71,12 @@ class Products extends React.Component {
 
 const mapStateToProps = ({ cart }) => ({ cart })
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = (dispatch) => ({
+  saveCart: () => {
+    dispatch({
+      type: 'cart/initCart',
+    })
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
