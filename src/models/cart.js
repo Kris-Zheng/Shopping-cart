@@ -120,9 +120,10 @@ export default {
         return total
       }, [])
 
-      console.log("after reducer => ", afterReducer)
-
-
+      console.log("after reducer => ", afterReducer);
+     
+      window.localStorage.setItem('added', JSON.stringify(afterReducer))
+      
       return {
         ...state,
         added: afterReducer
