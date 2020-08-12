@@ -2,12 +2,12 @@ import dva from 'dva';
 import './index.css';
 import products from './models/productlist';
 import cart from './models/cart';
+import createLoading from 'dva-loading';
 
 // 1. Initialize
 const app = dva();
-
+app.use(createLoading())
 // 3. Model
-// app.model(require('./models/example').default);
 app.model(products);
 app.model(cart);
 
